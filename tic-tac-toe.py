@@ -1,5 +1,6 @@
 grid = [[' ', ' ', ' '],[' ',' ',' '],[' ',' ',' ']]
 step = 'X'
+stopped = False
 amount_of_steps = 0
 game_finished = False
 x_wins = False
@@ -71,21 +72,27 @@ def check_if_finished():
         game_finished = True
     pass
 
-while game_finished == False:
+while not stopped:
+    while game_finished == False:
+        print_grid()
+        fill_grid()
+        amount_of_steps += 1
+        check_if_finished()
+        if step == 'X':
+            step = 'O'
+        else:
+           step = 'X'
     print_grid()
-    fill_grid()
-    amount_of_steps += 1
-    check_if_finished()
-    if step == 'X':
-        step = 'O'
+    if o_wins == True:
+        print("O wins!")
+    elif x_wins == True:
+        print("X wins!")
     else:
-        step = 'X'
-print_grid()
-if o_wins == True:
-    print("O wins!")
-elif x_wins == True:
-    print("X wins!")
-else:
-    print("Draw!")
-
+        print("Draw!")
+    command = input('Enter command:')
+    if command == 'STOP':
+        stopped = True
+    grid = [[' ', ' ', ' '],[' ',' ',' '],[' ',' ',' ']]
+    game_finished = False
+    amount_of_steps = 0
 
